@@ -1,5 +1,12 @@
 >>crawl
 -How deep of a website do you want to enter?
+Depth 1: http://www.example.com/news
+Depth 2: http://www.example.com/news/newest/
+Depth 3: http://www.example.com/news/newest/terror/
+Depth 4: http://www.example.com/news/newest/terror/country/
+
+--crawl 3
+
 sqlmap -u http://testphp.vulnweb.com/ --crawl 2
 
 >>batch
